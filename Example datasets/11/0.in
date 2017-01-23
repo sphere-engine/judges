@@ -1,0 +1,11 @@
+<html>
+<head>
+<title>Example dataset</title>
+</head>
+<body>
+    <form id="test-form">
+        <input type="text" name="text-field-1" />
+        <input type="text" name="text-field-2" />
+    </form>
+</body>
+</html>
