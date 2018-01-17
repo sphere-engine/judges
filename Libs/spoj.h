@@ -6,9 +6,7 @@ extern "C"
 #ifndef __SPOJ_H__
 #define __SPOJ_H__
 
-
 #include <stdio.h>
-
 
 /* return values */
 #define SPOJ_RV_POSITIVE        0
@@ -28,13 +26,13 @@ extern "C"
 
 /* file handles */
 extern FILE
-        *spoj_p_in,             /* problem's input */
-        *spoj_p_out,    /* problem's output */
-        *spoj_t_out,    /* tested program's output */
-        *spoj_t_src,    /* tested program's source */
-        *spoj_score,    /* score for the program, for challenge problems */
-        *spoj_p_info,   /* additional info - problemsetter only */
-        *spoj_u_info;   /* additional info - psetter and solution's owner */
+    *spoj_p_in,     /* problem's input */
+    *spoj_p_out,    /* problem's output */
+    *spoj_t_out,    /* tested program's output */
+    *spoj_t_src,    /* tested program's source */
+    *spoj_score,    /* score for the program, for challenge problems */
+    *spoj_p_info,   /* additional info - problemsetter only */
+    *spoj_u_info;   /* additional info - psetter and solution's owner */
 
 
 /* must be called before using other functions or variables */
