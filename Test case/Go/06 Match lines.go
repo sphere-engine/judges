@@ -26,7 +26,9 @@ package main
 
 import (
     "bufio"
+    "fmt"
     "os"
+    "strconv"
 )
 
 // file descriptors
@@ -69,6 +71,7 @@ func main(){
     var status = runJudge()
     closeStreams()
 
+    // exit with suitable status
     os.Exit(status)
 }
 
@@ -80,28 +83,50 @@ func runJudge() int {
     
     for {
         testCaseOutputLine, _, errTCO := inputStreams["test_case_output"].ReadLine()
-        programOutputLine, _, errPO := inputStreams["test_case_output"].ReadLine()
-        numberOfLines++
+        programOutputLine, _, errPO := inputStreams["program_output"].ReadLine()
 
-        outputStreams["debug"].Write(testCaseOutputLine)
-        outputStreams["debug"].Write(programOutputLine)
-
-        if errPO != nil {
-            outputStreams["debug"].WriteString("Koniec outputu")
-            continue
-        }
-
-        numberOfCorrectLines++
-
+        // finish when "test_case_output" stream is empty
         if errTCO != nil {
             break
         }
-    }
-    /*
-    outputStreams["score"].WriteString("33")
-    line, _, _ := inputStreams["test_case_output"].ReadLine()
-    outputStreams["debug"].Write(line)
-    */
 
-    return ACCEPTED
+        numberOfLines++
+
+        if errPO != nil {
+            outputStreams["debug"].WriteString(fmt.Sprintf(
+                "Outputs differ on line %d. Expected \"%s\" but program's output has ended before.\n",
+                numberOfLines, testCaseOutputLine))
+            continue
+        }
+
+        if string(testCaseOutputLine) == string(programOutputLine) {
+            numberOfCorrectLines++
+        } else {
+            outputStreams["debug"].WriteString(fmt.Sprintf(
+                "Outputs differ on line %d. Expected \"%s\" but was \"%s\".\n",
+                numberOfLines, testCaseOutputLine, programOutputLine))
+        }
+    }
+
+    // determine result (i.e. score and status)
+    var score int
+    
+    if numberOfLines == 0 {
+        score = 100
+    } else {
+        score = 100 * numberOfCorrectLines / numberOfLines;
+    }
+
+    var status int
+
+    if score > 0 {
+        status = ACCEPTED
+    } else {
+        status = WRONG_ANSWER
+    }
+
+    // set score
+    outputStreams["score"].WriteString(strconv.Itoa(score))
+
+    return status
 }
