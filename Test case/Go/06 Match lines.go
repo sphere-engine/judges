@@ -5,7 +5,7 @@
 // with corresponding lines from the program's output file.
 //
 // A submission is considered as correct (i.e. "accepted") if there is at least
-// a single matching between corresponding lines (i.e. lines are identical).
+// a single pair of identical corresponding lines.
 //
 // The score is calculated as a rounded percentage value of matched lines.
 //
@@ -20,7 +20,7 @@
 // Status: accepted
 // Score: 60 (out of 100)
 //
-// @copyright  Copyright (c) 2018 Sphere Research Labs (http://sphere-research.com)
+// @copyright  Copyright (c) 2018 Sphere Research Labs (http://sphere-engine.com)
 
 package main
 
